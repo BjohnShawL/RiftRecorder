@@ -18,10 +18,21 @@ namespace R_R.Common.Entities
         public bool IsBurned { get; set; }
         public int Attention { get; set; }
         public int Fade { get; set; }
-        public int Type { get; set; }
+        public MythosType Type { get; set; }
         public List<PowerTag> PowerTags { get; set; }
 
         public int RiftId { get; set; }
         public Rift Rift { get; set; }
     }
+}
+
+public enum MythosType
+{
+    Adaptation,
+    Bastion,
+    Divination,
+    Expression,
+    Mobility,
+    Relic,
+    Subversion
 }

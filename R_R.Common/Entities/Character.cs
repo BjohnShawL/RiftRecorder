@@ -24,6 +24,9 @@ namespace R_R.Common.Entities
         public Identity Identity { get; set; }
         public int CrewId { get; set; }
         public Crew Crew { get; set; }
+        public Game Game { get; set; }
+        public int GameId { get; set; }
+
 
         public List<Status> Statuses { get; set; }
         public List<StoryTag> StoryTags { get; set; }

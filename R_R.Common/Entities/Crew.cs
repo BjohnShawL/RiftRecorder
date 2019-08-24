@@ -11,8 +11,11 @@ namespace R_R.Common.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public string Weakness { get; set; }
+        public int GameId { get; set; }
+        public Game Game { get; set; }
         public List<Character> Characters { get; set; }
         public List<PowerTag> PowerTags { get; set; }
         public List<StoryTag> StoryTags { get; set; }
+
     }
 }

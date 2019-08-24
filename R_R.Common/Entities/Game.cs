@@ -13,10 +13,16 @@ namespace R_R.Common.Entities
         public int Id { get; set; }
         [Required, MaxLength(160)]
         public string GameTitle { get; set; }
+        [Required, MaxLength(2048)]
+        public string Description { get; set; }
         public List<Character> Characters { get; set; }
-        public List<DateTime> Sessions { get; set; }
-        
+        public List<GameSession> Sessions { get; set; }
+        public List<Crew> Crews { get; set; }
+        public List<StoryTag> StoryTags { get; set; }
+        public List<Note> Notes { get; set; }
         public MC MC { get; set; }
         public int McID { get; set; }
+
+
     }
 }

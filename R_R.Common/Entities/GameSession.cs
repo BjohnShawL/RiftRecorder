@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace R_R.Common.Entities
 {
-    public class MC
+    public class GameSession
     {
         [Key]
-        public int id { get; set; }
-        public R_RUser User { get; set; }
-        public string UserId { get; set; }
-        public List<Game> Games { get; set; }
+        public int Id { get; set; }
+        public DateTime SessionDate { get; set; }
+        public Game Game { get; set; }
+        public int GameId { get; set; }
 
     }
 }

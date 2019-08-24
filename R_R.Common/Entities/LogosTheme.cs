@@ -18,11 +18,22 @@ namespace R_R.Common.Entities
         public bool IsBurned { get; set; }
         public int Attention { get; set; }
         public int Crack { get; set; }
-        public int Type { get; set; }
+        public LogosType Type { get; set; }
         public List<PowerTag> PowerTags { get; set; }
 
         public int IdentityId { get; set; }
         public Identity Identity { get; set; }
 
     }
+}
+
+public enum LogosType
+{
+    DefiningEvent,
+    DefiningRelationship,
+    Mission,
+    Personality,
+    Possessions,
+    Routine,
+    Training
 }
