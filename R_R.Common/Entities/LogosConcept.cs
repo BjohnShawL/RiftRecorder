@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace R_R.Common.Entities
 {
-    public class Identity
+    public class LogosConcept
     {
         [Key]
         public int Id { get; set; }

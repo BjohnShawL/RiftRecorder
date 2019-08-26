@@ -20,7 +20,7 @@ namespace R_R.Common.Entities
 
         public Game Game { get; set; }
         public R_RUser User { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public int GameId { get; set; }
     }
 }

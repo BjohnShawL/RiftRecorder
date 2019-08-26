@@ -15,8 +15,8 @@ namespace R_R.Database.Contexts
         public DbSet<Game> Games { get; set; }
         public DbSet<MC> Mcs { get; set; }
         public DbSet<Character> Characters { get; set; }
-        public DbSet<Rift> Rifts { get; set; }
-        public DbSet<Identity> Identities { get; set; }
+        public DbSet<MythosConcept> MythosConcepts { get; set; }
+        public DbSet<LogosConcept> LogosConcepts { get; set; }
         public DbSet<Crew> Crews { get; set; }
         public DbSet<HelpHurt> HelpHurts { get; set; }
         public DbSet<MythosTheme> MythosThemes { get; set; }
@@ -47,13 +47,13 @@ namespace R_R.Database.Contexts
             builder.Entity<LogosTheme>().Property(lt => lt.Type).HasConversion<int>();
 
             builder.Entity<Character>()
-                .HasOne(c => c.Identity)
+                .HasOne(c => c.LogosConcept)
                 .WithOne(i => i.Character)
-                .HasForeignKey<Identity>(i => i.CharacterId);
+                .HasForeignKey<LogosConcept>(i => i.CharacterId);
             builder.Entity<Character>()
-                .HasOne(c => c.Rift)
+                .HasOne(c => c.MythosConcept)
                 .WithOne(i => i.Character)
-                .HasForeignKey<Rift>(i => i.CharacterId);
+                .HasForeignKey<MythosConcept>(i => i.CharacterId);
 
 
 

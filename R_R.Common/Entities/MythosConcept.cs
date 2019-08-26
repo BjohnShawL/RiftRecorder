@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 
 namespace R_R.Common.Entities
 {
-    public class Rift
+    public class MythosConcept
     {
         [Key]
         public int Id { get; set; }
-        public string Mystery { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
+        public string Description { get; set; }
         public List<MythosTheme> MythosThemes { get; set; }
         public int CharacterId { get; set; }
         public Character Character { get; set; }

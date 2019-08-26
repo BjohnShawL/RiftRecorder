@@ -15,14 +15,15 @@ namespace R_R.Common.Entities
         public string Name { get; set; }
         [MaxLength(1024)]
         public string Description { get; set; }
+        public string Mystery { get; set; }
         public bool IsBurned { get; set; }
         public int Attention { get; set; }
         public int Fade { get; set; }
         public MythosType Type { get; set; }
         public List<PowerTag> PowerTags { get; set; }
 
-        public int RiftId { get; set; }
-        public Rift Rift { get; set; }
+        public int MythosConceptId { get; set; }
+        public MythosConcept Rift { get; set; }
     }
 }
 

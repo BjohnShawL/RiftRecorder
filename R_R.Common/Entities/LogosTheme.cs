@@ -20,9 +20,9 @@ namespace R_R.Common.Entities
         public int Crack { get; set; }
         public LogosType Type { get; set; }
         public List<PowerTag> PowerTags { get; set; }
-
-        public int IdentityId { get; set; }
-        public Identity Identity { get; set; }
+        public string Identity { get; set; }
+        public int LogosConceptId { get; set; } 
+        public LogosConcept LogosConcept { get; set; }
 
     }
 }
