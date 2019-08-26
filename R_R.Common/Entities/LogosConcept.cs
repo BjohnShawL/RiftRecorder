@@ -14,7 +14,6 @@ namespace R_R.Common.Entities
         public List<LogosTheme> LogosThemes { get; set; }
         public string Description { get; set; }
         public string Name { get; set; }
-        public int CharacterId { get; set; }
-        public Character Character { get; set; }
+       
     }
 }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using R_R.Database.Contexts;
 
 namespace R_R.Database.Migrations
 {
     [DbContext(typeof(R_RContext))]
-    partial class R_RContextModelSnapshot : ModelSnapshot
+    [Migration("20190826160038_nullablePowerTagIds")]
+    partial class nullablePowerTagIds
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -522,7 +524,7 @@ namespace R_R.Database.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CharacterId");
+                    b.Property<int>("CharacterId");
 
                     b.Property<DateTime>("CreatedOn");
 

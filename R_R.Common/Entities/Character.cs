@@ -17,10 +17,7 @@ namespace R_R.Common.Entities
         [MaxLength(1024)]
         public string Description { get; set; }
         public int BuildupPoints { get; set; }
-        public int MythosConceptId { get; set; }
-        public MythosConcept MythosConcept { get; set; }
-        public int LogosConceptId { get; set; }
-        public LogosConcept LogosConcept { get; set; }
+        
         public int CrewId { get; set; }
         public Crew Crew { get; set; }
         public Game Game { get; set; }

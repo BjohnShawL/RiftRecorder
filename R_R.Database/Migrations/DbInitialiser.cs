@@ -16,7 +16,7 @@ namespace R_R.Database.Migrations
             context.Database.EnsureCreated();
         }
 
-        static void Initialise(R_RContext context)
+        public static void Initialise(R_RContext context)
         {
             var email = "a@bc.com";
             var userId = string.Empty;
@@ -67,6 +67,8 @@ namespace R_R.Database.Migrations
                             GameId = context.Games.First().Id
                         }
                     };
+                    context.Crews.AddRange(crews);
+                    context.SaveChanges();
                 }
 
                 if (!context.MythosConcepts.Any())
@@ -76,12 +78,12 @@ namespace R_R.Database.Migrations
                         new MythosConcept()
                         {
                             Name = "The Trickster",
-                            Description = "The classic archetype of the trickster. Usually a bit of a prick"
+                            Description = "The classic archetype of the trickster. Usually a bit of a prick",
                         },
                         new MythosConcept()
                         {
                             Name = "Action John",
-                            Description = "McLane, Wick, Wayne, Rambo - He's all of them and more"
+                            Description = "McLane, Wick, Wayne, Rambo - He's all of them and more",
                         }
                     };
                     context.AddRange(rifts);
@@ -96,12 +98,12 @@ namespace R_R.Database.Migrations
                         {
                             Name = "Conspiracy Freak",
                             Description =
-                                "Believes THEY are lying to us. THEY could be anyone, but it's probably aliens who run the government and want to turn frogs gay"
+                                "Believes THEY are lying to us. THEY could be anyone, but it's probably aliens who run the government and want to turn frogs gay",
                         },
                         new LogosConcept()
                         {
                             Name = "Blank Slate",
-                            Description = "There's not much going on behind those eyes. Maybe there was, once..."
+                            Description = "There's not much going on behind those eyes. Maybe there was, once...",
                         }
                     };
                     context.LogosConcepts.AddRange(identities);
@@ -119,8 +121,6 @@ namespace R_R.Database.Migrations
                                 "A raggedy, greasy haired man that smells of stale Guinness, sour sweat and the unhealthy reek of madness. Wears an 'I want to believe' T-shirt.",
                             BuildupPoints = 0,
                             GameId = context.Games.First(g => g.GameTitle.Equals("TestGame")).Id,
-                            MythosConceptId = context.MythosConcepts.First(r => r.Name.Equals("The Trickster")).Id,
-                            LogosConceptId = context.LogosConcepts.First(i => i.Name.Equals("Conspiracy Freak")).Id,
                             CrewId = context.Crews.First().Id
                         },
                         new Character()
@@ -129,21 +129,50 @@ namespace R_R.Database.Migrations
                             Description = "The ultimate action hero. He's pretty impressive",
                             BuildupPoints = 0,
                             GameId = context.Games.First(g => g.GameTitle.Equals("TestGame")).Id,
-                            MythosConceptId = context.MythosConcepts.First(r => r.Name.Equals("Action John")).Id,
-                            LogosConceptId = context.LogosConcepts.First(i => i.Name.Equals("Blank Slate")).Id,
+
                             CrewId = context.Crews.First().Id
                         }
                     };
                     context.Characters.AddRange(characters);
                     context.SaveChanges();
-                    foreach (var character in characters)
+                }
+
+                if (!context.CharacterMythoses.Any())
+                {
+                    var characterMythoi = new List<CharacterMythos>
                     {
-                        context.LogosConcepts.First(i => i.Name.Equals(character.LogosConcept.Name)).CharacterId =
-                            character.ID;
-                        context.MythosConcepts.First(r => r.Name.Equals(character.MythosConcept.Name)).CharacterId =
-                            character.ID;
-                        context.SaveChanges();
-                    }
+                        new CharacterMythos()
+                        {
+                            CharacterId = context.Characters.First(cm => cm.Name.Equals("Steel-Beams Kev")).ID,
+                            MythosConceptId = context.MythosConcepts.First(r => r.Name.Equals("The Trickster")).Id
+                        },
+                        new CharacterMythos()
+                        {
+                            CharacterId = context.Characters.First(cm => cm.Name.Equals("John")).ID,
+                            MythosConceptId = context.MythosConcepts.First(r => r.Name.Equals("Action John")).Id
+                        }
+                    };
+                    context.CharacterMythoses.AddRange(characterMythoi);
+                    context.SaveChanges();
+                }
+
+                if (!context.CharacterLogoses.Any())
+                {
+                    var characterLogoi = new List<CharacterLogos>
+                    {
+                        new CharacterLogos()
+                        {
+                            CharacterId = context.Characters.First(cl => cl.Name.Equals("Steel-Beams Kev")).ID,
+                            LogosConceptId = context.LogosConcepts.First(i => i.Name.Equals("Conspiracy Freak")).Id
+                        },
+                        new CharacterLogos()
+                        {
+                            CharacterId = context.Characters.First(cl => cl.Name.Equals("John")).ID,
+                            LogosConceptId = context.LogosConcepts.First(i => i.Name.Equals("Blank Slate")).Id
+                        }
+                    };
+                    context.CharacterLogoses.AddRange(characterLogoi);
+                    context.SaveChanges();
                 }
 
                 if (!context.MythosThemes.Any())
@@ -224,7 +253,7 @@ namespace R_R.Database.Migrations
                             IsBurned = false,
                             Crack = 0,
                             Attention = 0,
-                            LogosConceptId = context.LogosThemes.First(l => l.Name.Equals("Conspiracy Freak")).Id,
+                            LogosConceptId = context.LogosConcepts.First(l => l.Name.Equals("Conspiracy Freak")).Id,
                             Identity = "Believe nothing that The Man tells you without verifying it first."
                         },
                         new LogosTheme()
@@ -235,7 +264,7 @@ namespace R_R.Database.Migrations
                             IsBurned = false,
                             Crack = 0,
                             Attention = 0,
-                            LogosConceptId = context.LogosThemes.First(l => l.Name.Equals("Conspiracy Freak")).Id,
+                            LogosConceptId = context.LogosConcepts.First(l => l.Name.Equals("Conspiracy Freak")).Id,
                             Identity = "I'm not about to let my buddies get hurt"
                         },
                         new LogosTheme()
@@ -246,7 +275,7 @@ namespace R_R.Database.Migrations
                             IsBurned = false,
                             Crack = 0,
                             Attention = 0,
-                            LogosConceptId = context.LogosThemes.First(l => l.Name.Equals("Blank Slate")).Id,
+                            LogosConceptId = context.LogosConcepts.First(l => l.Name.Equals("Blank Slate")).Id,
                             Identity = "I can't have been all that interesting, if I can't remember myself..."
                         }
                     };
@@ -499,7 +528,7 @@ namespace R_R.Database.Migrations
                             IsBroad = false,
                             QuestionAnswered = $"g",
                             LogosThemeId = context.LogosThemes.First(mt => mt.Name.Equals("Tabula Rasa")).Id
-                        },
+                        }
                     };
                     context.PowerTags.AddRange(powerTags);
                     context.SaveChanges();
@@ -511,19 +540,18 @@ namespace R_R.Database.Migrations
                     {
                         new HelpHurt()
                         {
-                            CharacterId = context.Characters.First(c1=> c1.Name.Equals("Steel-Beams Kev")).ID,
-                            OtherCharacterId = context.Characters.First(c1=> c1.Name.Equals("John")).ID,
+                            CharacterId = context.Characters.First(c1 => c1.Name.Equals("Steel-Beams Kev")).ID,
+                            OtherCharacterId = context.Characters.First(c1 => c1.Name.Equals("John")).ID,
                             Help = 2,
                             Hurt = 0
                         },
                         new HelpHurt()
                         {
-                            CharacterId = context.Characters.First(c1=> c1.Name.Equals("John")).ID,
-                            OtherCharacterId = context.Characters.First(c1=> c1.Name.Equals("Steel-Beams Kev")).ID,
+                            CharacterId = context.Characters.First(c1 => c1.Name.Equals("John")).ID,
+                            OtherCharacterId = context.Characters.First(c1 => c1.Name.Equals("Steel-Beams Kev")).ID,
                             Help = 0,
                             Hurt = 0
                         }
-
                     };
                     context.HelpHurts.AddRange(helphurts);
                     context.SaveChanges();
@@ -535,7 +563,7 @@ namespace R_R.Database.Migrations
                     {
                         new Status()
                         {
-                            CharacterId = context.Characters.First(c1=> c1.Name.Equals("Steel-Beams Kev")).ID,
+                            CharacterId = context.Characters.First(c1 => c1.Name.Equals("Steel-Beams Kev")).ID,
                             Description = "Falling down drunk",
                             Effect = 3,
                             IsPositive = false
@@ -585,12 +613,12 @@ namespace R_R.Database.Migrations
                     {
                         new UserCharacter()
                         {
-                            CharacterId = context.Characters.First(c=> c.Name.Equals("Steel-Beams Kev")).ID,
+                            CharacterId = context.Characters.First(c => c.Name.Equals("Steel-Beams Kev")).ID,
                             UserId = userId
                         },
                         new UserCharacter()
                         {
-                            CharacterId = context.Characters.First(c=> c.Name.Equals("John")).ID,
+                            CharacterId = context.Characters.First(c => c.Name.Equals("John")).ID,
                             UserId = userId
                         }
                     };

@@ -28,6 +28,8 @@ namespace R_R.Database.Contexts
         public DbSet<UserCharacter> UserCharacters { get; set; }
         public DbSet<UserGame> UserGames { get; set; }
         public DbSet<GameSession> GameSessions { get; set; }
+        public DbSet<CharacterMythos> CharacterMythoses { get; set; }
+        public DbSet<CharacterLogos> CharacterLogoses { get; set; }
 
 
         public R_RContext(DbContextOptions<R_RContext> options) : base(options)
@@ -42,20 +44,13 @@ namespace R_R.Database.Contexts
             builder.Entity<UserGame>().HasKey(ug => new {ug.GameId, ug.UserId});
             builder.Entity<UserCharacter>().HasKey(uc => new {uc.CharacterId, uc.UserId});
             builder.Entity<HelpHurt>().HasKey(hh => new {hh.CharacterId, hh.OtherCharacterId});
+            builder.Entity<CharacterMythos>().HasKey(cm => new {cm.CharacterId, cm.MythosConceptId});
+            builder.Entity<CharacterLogos>().HasKey(cm => new { cm.CharacterId, cm.LogosConceptId });
 
             builder.Entity<MythosTheme>().Property(mt => mt.Type).HasConversion<int>();
             builder.Entity<LogosTheme>().Property(lt => lt.Type).HasConversion<int>();
 
-            builder.Entity<Character>()
-                .HasOne(c => c.LogosConcept)
-                .WithOne(i => i.Character)
-                .HasForeignKey<LogosConcept>(i => i.CharacterId);
-            builder.Entity<Character>()
-                .HasOne(c => c.MythosConcept)
-                .WithOne(i => i.Character)
-                .HasForeignKey<MythosConcept>(i => i.CharacterId);
-
-
+            
 
             foreach (var relationship in builder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
             {

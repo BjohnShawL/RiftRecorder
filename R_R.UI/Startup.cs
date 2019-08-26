@@ -14,6 +14,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using R_R.Common.Entities;
 using R_R.Database.Contexts;
+using R_R.Database.Migrations;
+using R_R.Database.Services;
 
 namespace R_R.UI
 {
@@ -44,10 +46,11 @@ namespace R_R.UI
                 .AddEntityFrameworkStores<R_RContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddScoped<IDbReadService, DbReadService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, R_RContext context)
         {
             if (env.IsDevelopment())
             {
@@ -64,6 +67,8 @@ namespace R_R.UI
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            //DbInitialiser.Initialise(context); 
 
             app.UseAuthentication();
 

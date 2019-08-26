@@ -16,8 +16,7 @@ namespace R_R.Common.Entities
         [Required]
         public string Description { get; set; }
         public List<MythosTheme> MythosThemes { get; set; }
-        public int CharacterId { get; set; }
-        public Character Character { get; set; }
+
 
     }
 }

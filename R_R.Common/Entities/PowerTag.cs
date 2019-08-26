@@ -19,9 +19,9 @@ namespace R_R.Common.Entities
         public bool IsBurned { get; set; }
         public string QuestionAnswered { get; set; }
 
-        public int MythosThemeId { get; set; }
+        public int? MythosThemeId { get; set; }
         public MythosTheme MythosTheme { get; set; }
-        public int LogosThemeId { get; set; }
+        public int? LogosThemeId { get; set; }
         public LogosTheme LogosTheme { get; set; }
     }
 }
