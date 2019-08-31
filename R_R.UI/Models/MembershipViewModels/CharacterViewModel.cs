@@ -10,8 +10,8 @@ namespace R_R.UI.Models.MembershipViewModels
     public class CharacterViewModel
     {
         public CharacterDTO Character { get; set; }
-        public RiftDTO Rift { get; set; }
-        public IdentityDTO Identity { get; set; }
+        public MythosConceptDTO MythosConcept { get; set; }
+        public LogosConceptDTO LogosConcept { get; set; }
         public GameDTO Game { get; set; }
         public IEnumerable<NoteDTO> Notes { get; set; }
         public CrewDTO Crew { get; set; }

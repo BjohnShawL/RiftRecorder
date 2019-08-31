@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using R_R.Common.Entities;
+using R_R.Database.Services;
 using R_R.UI.Models;
 
 namespace R_R.UI.Controllers
@@ -13,13 +14,20 @@ namespace R_R.UI.Controllers
     public class HomeController : Controller
     {
         private readonly SignInManager<R_RUser> _signInManager;
+        private readonly IUIReadService _uiRead;
 
-        public HomeController(SignInManager<R_RUser> signInManager)
+
+        public HomeController(SignInManager<R_RUser> signInManager, IUIReadService _uiRead)
         {
             _signInManager = signInManager;
+            this._uiRead = _uiRead;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var uid = "131a96ae-32db-43a8-a866-d973b42b873c";
+
+            var characters = (await _uiRead.GetCharacter(uid,2));
+
             if (!_signInManager.IsSignedIn(User))
             {
                 return RedirectToPage("/Account/Login", new {Area = "Identity"});

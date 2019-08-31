@@ -47,6 +47,7 @@ namespace R_R.UI
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddScoped<IDbReadService, DbReadService>();
+            services.AddScoped<IUIReadService, UIReadService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
