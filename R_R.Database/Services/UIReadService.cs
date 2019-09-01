@@ -8,6 +8,7 @@ using R_R.Common.EntitiyInterfaces;
 
 namespace R_R.Database.Services
 {
+    
     public class UIReadService :IUIReadService  
     {
         private readonly IDbReadService _dbRead;
