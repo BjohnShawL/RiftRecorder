@@ -26,8 +26,14 @@ namespace R_R.UI.Controllers
         {
             var uid = "131a96ae-32db-43a8-a866-d973b42b873c";
 
+            var storyTags = (await _uiRead.GetStoryTags(1, uid, 2)).ToList();
+            var notes = (await _uiRead.GetNotes(1,uid)).ToList();
+            var games = (await _uiRead.GetGames(uid)).ToList();
             var characters = (await _uiRead.GetCharacter(uid,2));
 
+            var concepts = (await _uiRead.GetConcepts(characters.ID)).ToList();
+
+            
             if (!_signInManager.IsSignedIn(User))
             {
                 return RedirectToPage("/Account/Login", new {Area = "Identity"});

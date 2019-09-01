@@ -4,10 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using R_R.Common.EntitiyInterfaces;
 
 namespace R_R.Common.Entities
 {
-    public class LogosTheme
+    public class LogosTheme :ITheme
     {
         [Key]
         public int Id { get; set; }

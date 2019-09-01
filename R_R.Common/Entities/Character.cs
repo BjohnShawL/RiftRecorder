@@ -18,6 +18,8 @@ namespace R_R.Common.Entities
         public string Description { get; set; }
         public int BuildupPoints { get; set; }
         
+        public bool IsActive { get; set; }
+
         public int CrewId { get; set; }
         public Crew Crew { get; set; }
         public Game Game { get; set; }
